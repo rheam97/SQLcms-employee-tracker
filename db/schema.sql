@@ -4,23 +4,23 @@ DROP TABLE IF EXISTS department;
 
 CREATE TABLE department(
 department_id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
-name VARCHAR(30)
+name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE role(
 role_id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
-title VARCHAR(30),
-salary DECIMAL,
-department_id INTEGER,
+title VARCHAR(30) NOT NULL,
+salary DECIMAL NOT NULL,
+department_id INTEGER NOT NULL,
 CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(department_id)
 );
 
 CREATE TABLE employee(
 employee_id INTEGER  AUTO_INCREMENT PRIMARY KEY NOT NULL,
-first_name VARCHAR(30),
-last_name VARCHAR(30),
+first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30) NOT NULL,
 manager_id INTEGER,
-role_id INTEGER,
-CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(role_id),
-CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(employee_id) 
+role_id INTEGER NOT NULL,
+CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(role_id) ON DELETE CASCADE,
+CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(employee_id) ON DELETE CASCADE
 );

@@ -1,15 +1,5 @@
 const inquirer = require('inquirer')
-const mysql2 = require('mysql2/promise')
-const db = mysql2.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'employees'
-})
-
-db.connect(err=> {
-    if(err) throw err
-    console.log('Database connected.')})
+const myemployees = require('./class')
 
 const init = () => {
     inquirer.prompt({
@@ -29,3 +19,32 @@ const init = () => {
 
 
 // for adding: function asks for input with inquirer and adds input to db
+
+const addDept = () => {
+    inquirer.prompt({
+
+    }).then(data=> {
+        myemployees.addDepartment(data)
+    })
+}
+
+const addRole = ()=> {
+
+}
+
+const addEmp = ()=> {
+inquirer.prompt({
+    //first name 
+}, {
+   // last name
+}, {
+// role list
+}, {
+    // manager
+}, {
+    //dept.
+}).then ({}=> {
+    
+})
+}
+
