@@ -2,6 +2,10 @@ const inquirer = require('inquirer')
 const myemployees = require('./class')
 const cTable = require('console.table')
 
+const sleep = () => {setTimeout(()=> {
+    init()
+   }, 1000)}
+
 // list to either view departments, roles, employees, or add them/ exit/ delete/ update
 function init () {
     inquirer.prompt({
@@ -12,15 +16,15 @@ function init () {
         switch (action){
             case 'View All Departments':
             myemployees.departments()
-                init()
+            sleep()
             break;
             case 'View All Roles':
             myemployees.roles()
-                init()
+            sleep()
             break;
             case 'View All Employees':
             myemployees.employees()
-                init()
+            sleep()
             break;
             case 'Add a Department':
             addDept()
@@ -41,18 +45,19 @@ function init () {
     })
 }
 
-const addDept = async () => {
+const addDept = () => {
     inquirer.prompt({
         type: 'input',
         name: 'name',
         message: 'What would you like to name your department?'
-    })
-       await myemployees.addDepartment(data)
-       init()
+    }).then(data=> 
+        {myemployees.addDepartment(data)
+        sleep()})
+   
 }
 
 const addRole = async ()=> {
-    const [dept] = await myemployees.departments()
+    const [dept] = await myemployees.departments
     const deptChoices = dept.map(({id, name})=> ({
         name: name,
         value: id
@@ -80,12 +85,15 @@ const addRole = async ()=> {
         name: 'dept',
         message: 'What department is this role a part of?',
         choices: deptChoices
-    }])
-    await myemployees.addRoles(data)
-    init()
+    }]).then(data=>{
+        myemployees.addRoles(data)
+        sleep()
+    })
+ 
+
 }
 
-const addEmp = async ()=> {
+const addEmp = ()=> {
 const [role] = myemployees.roles()
 const roleChoices = role.map(({id, title})=> ({
     name: title,
@@ -115,8 +123,9 @@ inquirer.prompt([{
     message: "Who is the new employee's manager?",
     choices: managerChoices
 }])
-await myemployees.addEmp(data)
-init()
+    myemployees.addRoles(data)
+    sleep()
+
 }
 
 const updateEmp = ()=> {

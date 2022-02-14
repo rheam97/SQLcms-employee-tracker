@@ -7,26 +7,23 @@ class MyEmployees{
     }
     departments(){
         const sql = `SELECT * FROM department`
-        return this.db.query(sql, (err, rows)=> {
-            if(err){
-                console.log(err)
-            }
+        return db.promise().query(sql).then(([rows])=> {
             console.log("\n")
             console.table(rows)
             console.log("\n")
-            
+        }).catch(error=> {
+            throw error
         })
     }
     roles(){
         const sql = `SELECT role.*, department.name AS department 
         FROM role LEFT JOIN department ON role.department_id= department.department_id`
-        return this.db.query(sql, (err, rows)=> {
-            if(err){
-                console.log(err)
-            }
+        return db.promise().query(sql).then(([rows])=> {
             console.log("\n")
             console.table(rows) 
             console.log("\n")
+        }).catch(error=> {
+            throw error
         })
     }
     employees(){
@@ -34,26 +31,25 @@ class MyEmployees{
         role.title AS title, role.salary AS salary, department.name AS department FROM employee
         LEFT JOIN role ON employee.role_id = role.role_id
         LEFT JOIN department ON role.department_id = department.department_id`
-        return this.db.query(sql, (err, rows)=> {
-            if(err){
-                console.log(err)
-            }
+        return db.promise().query(sql).then(([rows])=> {
             console.log("\n")
-            console.table(rows)
+            console.table(rows) 
             console.log("\n")
+        }).catch(error=> {
+            throw error
         })
     }
     addDepartment(data){
         const sql = `INSERT INTO department (name) VALUES(?)`
         const params = data.name
-        return this.db.query(sql, params, (err, result)=> {
-            if(err){
-                console.log(err)
-            }
-            else{
-                console.log(`Added department named ${params} into database.`)
-            }
+        return db.promise().query(sql, params).then(()=> {
+            console.log("\n")
+            console.log(`Added department named ${params} into database.`)
+            console.log("\n")
+        }).catch(error=> {
+            throw error
         })
+
     }
     // addRoles(data){
     //     const sql = `INSERT INTO role (name, salary, )`
