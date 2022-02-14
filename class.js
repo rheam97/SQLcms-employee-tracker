@@ -8,19 +8,19 @@ class MyEmployees{
     noTableDepartments(){
         const sql = `SELECT department.name, department.department_id 
         FROM department`
-        return db.promise().query(sql)
+        return db.promise().execute(sql)
     }
     noTableRoles(){
         const sql = `SELECT role.*, department.name AS department 
         FROM role LEFT JOIN department ON role.department_id= department.department_id`
-        return db.promise().query(sql)
+        return db.promise().execute(sql)
     }
     noTableEmployees(){
             const sql = `SELECT employee.employee_id, employee.first_name, employee.last_name, employee.manager_id, 
             role.title AS title, role.salary AS salary, department.name AS department FROM employee
             LEFT JOIN role ON employee.role_id = role.role_id
             LEFT JOIN department ON role.department_id = department.department_id`
-            return db.promise().query(sql)
+            return db.promise().execute(sql)
     }
     departments(){
         const sql = `SELECT * FROM department`
@@ -69,8 +69,8 @@ class MyEmployees{
 
     }
     addRoles(data){
-    const sql = `INSERT INTO role (name, salary, department_id) VALUES(?,?,?)`
-    const params = [data.name, data.salary, data.id]
+    const sql = `INSERT INTO role (title, salary, department_id) VALUES(?,?,?)`
+    const params = [data.title, data.salary, data.dept]
     return db.promise().query(sql, params).then(()=> {
         console.log("\n")
         console.log(`Added role named ${params[0]} into database.`)

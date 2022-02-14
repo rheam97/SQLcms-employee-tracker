@@ -57,9 +57,9 @@ const addDept = () => {
 
 const addRole = async ()=> {
     const [dept] = await myemployees.noTableDepartments()
-    const deptChoices = dept.map(({id, name})=> ({
+    const deptChoices = dept.map(({department_id, name})=> ({
         name: name,
-        value: id
+        value: department_id
     }))
     inquirer.prompt([{
     type: 'input',
@@ -94,14 +94,14 @@ const addRole = async ()=> {
 
 const addEmp = async ()=> {
 const [role] = await myemployees.noTableRoles()
-const roleChoices = role.map(({id, title})=> ({
+const roleChoices = role.map(({role_id, title})=> ({
     name: title,
-    value: id
+    value: role_id
 }))
 const [manager] = await myemployees.noTableEmployees()
-const managerChoices = manager.map(({id, first_name, last_name})=> ({
+const managerChoices = manager.map(({employee_id, first_name, last_name})=> ({
     name: first_name + '' + last_name,
-    value: id
+    value: employee_id
     }))
 inquirer.prompt([{
     type: 'input',
