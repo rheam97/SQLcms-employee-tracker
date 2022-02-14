@@ -4,7 +4,7 @@ const cTable = require('console.table')
 
 // list to either view departments, roles, employees, or add them/ exit/ delete/ update
         // launch inquirer prompts
-const init = () => {
+function init () {
     inquirer.prompt({
         type: 'list',
         name: 'action',
@@ -12,21 +12,16 @@ const init = () => {
     }).then(({action})=> {
         switch (action){
             case 'View All Departments':
-            myemployees.departments().then({
+            myemployees.departments()
                 init()
-            })
             break;
             case 'View All Roles':
-            myemployees.roles().then({
+            myemployees.roles()
                 init()
-            })
-            init()
             break;
             case 'View All Employees':
-            myemployees.employees().then({
+            myemployees.employees()
                 init()
-            })
-            init()
             break;
             case 'Add a Department':
             addDept()
@@ -59,35 +54,35 @@ const init = () => {
 
 // for adding: function asks for input with inquirer and adds input to db
 
-const addDept = () => {
+const addDept = async () => {
     inquirer.prompt({
-
-    }).then(data=> {
-        myemployees.addDepartment(data)
+        type: 'input',
+        name: 'deptname',
+        message: 'What would you like to name your department?'
     })
+       await myemployees.addDepartment(data)
+       init()
 }
 
-const addRole = ()=> {
-
+const addRole = async ()=> {
+console.log('r')
+init()
 }
 
-const addEmp = ()=> {
-inquirer.prompt({
-    //first name 
-}, {
-   // last name
-}, {
-// role list
-}, {
-    // manager
-}, {
-    //dept.
-}).then ({}=> {
+// const addEmp = ()=> {
+// inquirer.prompt({
+//     //first name 
+// }, {
+//    // last name
+// }, {
+// // role list
+// }, {
+//     // manager
+// }, {
+//     //dept.
+// })
 
-})
-}
+// const updateEmp = ()=> {
 
-const updateEmp = ()=> {
-
-}
-
+// }
+init()

@@ -6,8 +6,5 @@ const db = mysql2.createConnection({
     database: 'myemployees'
 })
 
-db.connect(err=> {
-    if(err) throw err
-    console.log('Database connected.')})
     
 module.exports = db

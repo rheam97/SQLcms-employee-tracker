@@ -1,5 +1,6 @@
-const cTable = require('console.table')
 const db = require('./connection')
+const cTable = require('console.table')
+
 class MyEmployees{
     constructor(db){
       this.db = db
@@ -10,6 +11,7 @@ class MyEmployees{
             if(err){
                 console.log(err)
             }
+            console.log('got it')
             console.table(rows)
         })
     }
@@ -35,11 +37,6 @@ class MyEmployees{
             console.table(rows)
         })
     }
-    addEmployees(data){
-        const sql = `INSERT INTO employee(first_name, last_name, ) VALUES (?,?,?,?)`
-        const params = data.
-
-    }
 }
 
-module.exports = MyEmployees
+module.exports = new MyEmployees(db)
