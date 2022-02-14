@@ -54,44 +54,43 @@ function init () {
 
 // for adding: function asks for input with inquirer and adds input to db
 
-// const addDept = async () => {
-//     inquirer.prompt({
-//         type: 'input',
-//         name: 'deptname',
-//         message: 'What would you like to name your department?'
-//     })
-//        await myemployees.addDepartment(data)
-//        init()
-// }
+const addDept = async () => {
+    inquirer.prompt({
+        type: 'input',
+        name: 'deptname',
+        message: 'What would you like to name your department?'
+    })
+       await myemployees.addDepartment(data)
+       init()
+}
 
-// const addRole = async ()=> {
-//     inquirer.prompt({
-//     type: 'input',
-//     name: 'rolename',
-//     message: 'What would you like to name the role?'
-//     },
-//     {
-//         type: 'input',
-//         name: 'salary',
-//         message: 'What is the salary of this role?',
-//         validate: (salary)=> {
-//             if(isNaN(salary)){
-//                 return false
-//             }
-//             else{
-//                 return true
-//             }
-//         }
-//     },
-//     {
-//         type: 'input',
-//         name: 'dept',
-//         message: 'What department is this role a part of?'
-//     }).then(data=> {
-//         myemployees.
-//     })
-// init()
-// }
+const addRole = async ()=> {
+    inquirer.prompt({
+    type: 'input',
+    name: 'rolename',
+    message: 'What would you like to name the role?'
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: 'What is the salary of this role?',
+        validate: (salary)=> {
+            if(isNaN(salary)){
+                return false
+            }
+            else{
+                return true
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'dept',
+        message: 'What department is this role a part of?'
+    })
+    await myemployees.addRoles(data)
+    init()
+}
 
 // const addEmp = ()=> {
 // inquirer.prompt({

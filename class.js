@@ -2,8 +2,8 @@ const db = require('./connection')
 const cTable = require('console.table')
 
 class MyEmployees{
-    constructor(db){
-      this.db = db
+    constructor(){
+      
     }
     departments(){
         const sql = `SELECT * FROM department`
