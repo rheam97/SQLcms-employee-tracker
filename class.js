@@ -80,7 +80,27 @@ class MyEmployees{
     })
     }
     addEmployees(data){
-        const sql = `INSERT INTO employee`
+        const sql = `INSERT INTO employee(first_name, last_name, role_id, manager_id)
+        VALUES(?,?,?,?)`
+        const params = [data.first_name, data.last_name, data.role_id, data.manager_id]
+        return db.promise().query(sql, params).then(()=> {
+            console.log("\n")
+            console.log(`Added employee named ${params[0]} ${params[1]} into database.`)
+            console.log("\n")
+        }).catch(error=> {
+            throw error
+        })
+    }
+    updateEmployees(data){
+        const sql = `UPDATE employee SET role_id=? WHERE employee_id =?`
+        const params = [data.role_id, data.employee_id]
+        return db.promise().query(sql, params).then(()=> {
+            console.log("\n")
+            console.log(`Updated employee role in database.`)
+            console.log("\n")
+        }).catch(error=> {
+            throw error
+        })
     }
 }
 

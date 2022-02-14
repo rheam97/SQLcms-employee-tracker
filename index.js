@@ -56,7 +56,7 @@ const addDept = () => {
 }
 
 const addRole = async ()=> {
-    const dept = await myemployees.noTableDepartments()
+    const [dept] = await myemployees.noTableDepartments()
     const deptChoices = dept.map(({id, name})=> ({
         name: name,
         value: id
@@ -80,7 +80,7 @@ const addRole = async ()=> {
         }
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'dept',
         message: 'What department is this role a part of?',
         choices: deptChoices
