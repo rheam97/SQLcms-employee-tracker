@@ -2,9 +2,9 @@ const inquirer = require('inquirer')
 const myemployees = require('./class')
 const cTable = require('console.table')
 
-const sleep = () => {setTimeout(()=> {
+const int = () => setTimeout(()=> 
     init()
-   }, 1000)}
+   , 1000)
 
 // list to either view departments, roles, employees, or add them/ exit/ delete/ update
 function init () {
@@ -16,15 +16,15 @@ function init () {
         switch (action){
             case 'View All Departments':
             myemployees.departments()
-            sleep()
+            int()
             break;
             case 'View All Roles':
             myemployees.roles()
-            sleep()
+            int()
             break;
             case 'View All Employees':
             myemployees.employees()
-            sleep()
+            int()
             break;
             case 'Add a Department':
             addDept()
@@ -52,12 +52,12 @@ const addDept = () => {
         message: 'What would you like to name your department?'
     }).then(data=> 
         {myemployees.addDepartment(data)
-        sleep()})
+        int()})
    
 }
 
 const addRole = async ()=> {
-    const [dept] = await myemployees.departments
+    const [dept] = await myemployees.departments()
     const deptChoices = dept.map(({id, name})=> ({
         name: name,
         value: id
@@ -87,19 +87,19 @@ const addRole = async ()=> {
         choices: deptChoices
     }]).then(data=>{
         myemployees.addRoles(data)
-        sleep()
+        int()
     })
  
 
 }
 
-const addEmp = ()=> {
-const [role] = myemployees.roles()
+const addEmp = async ()=> {
+const [role] = await myemployees.roles()
 const roleChoices = role.map(({id, title})=> ({
     name: title,
     value: id
 }))
-const [manager] =myemployees.employees()
+const [manager] = await myemployees.employees()
 const managerChoices = manager.map(({id, first_name, last_name})=> ({
     name: first_name + '' + last_name,
     value: id
@@ -124,13 +124,13 @@ inquirer.prompt([{
     choices: managerChoices
 }])
     myemployees.addRoles(data)
-    sleep()
+    int()
 
 }
 
-const updateEmp = ()=> {
- const [employee] = myemployees.employees()
- const [role] = myemployees.roles()
+const updateEmp = async ()=> {
+ const [employee] = await myemployees.employees()
+ const [role] = await myemployees.roles()
  inquirer.prompt([{
      type: 'list',
      name: 'employee',
