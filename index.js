@@ -2,9 +2,8 @@ const inquirer = require('inquirer')
 const myemployees = require('./class')
 const cTable = require('console.table')
 
-const int = () => setTimeout(()=> 
-    init()
-   , 1000)
+// interval before returning back to list prompt
+const int = () => setTimeout(()=> init(), 1000)
 
 // list to either view departments, roles, employees, or add them/ exit/ delete/ update
 function init () {
@@ -57,7 +56,7 @@ const addDept = () => {
 }
 
 const addRole = async ()=> {
-    const [dept] = await myemployees.departments()
+    const dept = await myemployees.noTableDepartments()
     const deptChoices = dept.map(({id, name})=> ({
         name: name,
         value: id
@@ -122,10 +121,11 @@ inquirer.prompt([{
     name:'manager',
     message: "Who is the new employee's manager?",
     choices: managerChoices
-}])
-    myemployees.addRoles(data)
+}]).then(data=> {
+    myemployees.addEmployees(data)
     int()
-
+}
+)
 }
 
 const updateEmp = async ()=> {
