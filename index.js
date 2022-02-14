@@ -93,12 +93,12 @@ const addRole = async ()=> {
 }
 
 const addEmp = async ()=> {
-const [role] = await myemployees.roles()
+const [role] = await myemployees.noTableRoles()
 const roleChoices = role.map(({id, title})=> ({
     name: title,
     value: id
 }))
-const [manager] = await myemployees.employees()
+const [manager] = await myemployees.noTableEmployees()
 const managerChoices = manager.map(({id, first_name, last_name})=> ({
     name: first_name + '' + last_name,
     value: id
