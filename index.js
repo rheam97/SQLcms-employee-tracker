@@ -100,7 +100,7 @@ const roleChoices = role.map(({role_id, title})=> ({
 }))
 const [manager] = await myemployees.noTableEmployees()
 const managerChoices = manager.map(({employee_id, first_name, last_name})=> ({
-    name: first_name + '' + last_name,
+    name: first_name + ' ' + last_name,
     value: employee_id
     }))
 inquirer.prompt([{
@@ -129,14 +129,29 @@ inquirer.prompt([{
 }
 
 const updateEmp = async ()=> {
- const [employee] = await myemployees.employees()
- const [role] = await myemployees.roles()
+ const [employee] = await myemployees.noTableEmployees()
+ const employeeChoices = employee.map(({employee_id, first_name, last_name})=> ({
+     name: first_name + ' ' + last_name,
+     value: employee_id
+ }))
+ const [role] = await myemployees.noTableRoles()
+ const roleChoices = role.map(({role_id, title})=> ({
+    name: title,
+    value: role_id
+ }))
  inquirer.prompt([{
      type: 'list',
      name: 'employee',
-     choices: employee
- }])
- }
+     choices: employeeChoices
+ },
+{
+    type: 'list',
+    name: 'role',
+    choices: roleChoices
+}]).then(data=> {
+    myemployees.updateEmployees(data)
+    int()
+})}
 
 init()
 
