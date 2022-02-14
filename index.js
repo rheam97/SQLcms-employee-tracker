@@ -37,20 +37,14 @@ function init () {
             break;
             case 'Exit':
             console.log('Goodbye.')
-            return;
+            return process.exit()
         }
     })
 }
 
-
-
 // function for each
 
-
 // when viewing department: function console logs department table
-
-
-
 
 // for adding: function asks for input with inquirer and adds input to db
 
@@ -65,7 +59,7 @@ const addDept = async () => {
 }
 
 const addRole = async ()=> {
-    inquirer.prompt({
+    inquirer.prompt([{
     type: 'input',
     name: 'rolename',
     message: 'What would you like to name the role?'
@@ -87,23 +81,33 @@ const addRole = async ()=> {
         type: 'input',
         name: 'dept',
         message: 'What department is this role a part of?'
-    })
+    }])
     await myemployees.addRoles(data)
     init()
 }
 
-// const addEmp = ()=> {
-// inquirer.prompt({
-//     //first name 
-// }, {
-//    // last name
-// }, {
-// // role list
-// }, {
-//     // manager
-// }, {
-//     //dept.
-// })
+const addEmp = ()=> {
+const [role] = 
+inquirer.prompt([{
+    type: 'input',
+    name:'firstname',
+    message: "What is the new employee's first name?"
+}, {
+    type: 'input',
+    name:'lastname',
+    message: "What is the new employee's last name?"
+}, {
+    type: 'list',
+    name:'role',
+    message: "What is the new employee's role",
+    choices: []
+}, {
+    type: 'list',
+    name:'manager',
+    message: "What is the new employee's first name?",
+    choices:[]
+}])
+}
 
 // const updateEmp = ()=> {
 

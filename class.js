@@ -2,27 +2,30 @@ const db = require('./connection')
 const cTable = require('console.table')
 
 class MyEmployees{
-    constructor(){
-      
+    constructor(db){
+      this.db = db
     }
     departments(){
         const sql = `SELECT * FROM department`
-        return db.query(sql, (err, rows)=> {
+        return this.db.query(sql, (err, rows)=> {
             if(err){
                 console.log(err)
             }
-            console.log('got it')
+            console.log("\n")
             console.table(rows)
+            console.log("\n")
         })
     }
     roles(){
         const sql = `SELECT role.*, department.name AS department 
         FROM role LEFT JOIN department ON role.department_id= department.department_id`
-        return db.query(sql, (err, rows)=> {
+        return this.db.query(sql, (err, rows)=> {
             if(err){
                 console.log(err)
             }
+            console.log("\n")
             console.table(rows) 
+            console.log("\n")
         })
     }
     employees(){
@@ -30,11 +33,13 @@ class MyEmployees{
         role.title AS title, role.salary AS salary, department.name AS department FROM employee
         LEFT JOIN role ON employee.role_id = role.role_id
         LEFT JOIN department ON role.department_id = department.department_id`
-        return db.query(sql, (err, rows)=> {
+        return this.db.query(sql, (err, rows)=> {
             if(err){
                 console.log(err)
             }
+            console.log("\n")
             console.table(rows)
+            console.log("\n")
         })
     }
 }
