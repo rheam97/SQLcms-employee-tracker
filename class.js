@@ -14,6 +14,7 @@ class MyEmployees{
             console.log("\n")
             console.table(rows)
             console.log("\n")
+            
         })
     }
     roles(){
@@ -42,6 +43,21 @@ class MyEmployees{
             console.log("\n")
         })
     }
+    addDepartment(data){
+        const sql = `INSERT INTO department (name) VALUES(?)`
+        const params = data.name
+        return this.db.query(sql, params, (err, result)=> {
+            if(err){
+                console.log(err)
+            }
+            else{
+                console.log(`Added department named ${params} into database.`)
+            }
+        })
+    }
+    // addRoles(data){
+    //     const sql = `INSERT INTO role (name, salary, )`
+    // }
 }
 
 module.exports = new MyEmployees(db)

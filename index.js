@@ -3,7 +3,6 @@ const myemployees = require('./class')
 const cTable = require('console.table')
 
 // list to either view departments, roles, employees, or add them/ exit/ delete/ update
-        // launch inquirer prompts
 function init () {
     inquirer.prompt({
         type: 'list',
@@ -42,16 +41,10 @@ function init () {
     })
 }
 
-// function for each
-
-// when viewing department: function console logs department table
-
-// for adding: function asks for input with inquirer and adds input to db
-
 const addDept = async () => {
     inquirer.prompt({
         type: 'input',
-        name: 'deptname',
+        name: 'name',
         message: 'What would you like to name your department?'
     })
        await myemployees.addDepartment(data)
@@ -59,9 +52,14 @@ const addDept = async () => {
 }
 
 const addRole = async ()=> {
+    const [dept] = await myemployees.departments()
+    const deptChoices = dept.map(({id, name})=> ({
+        name: name,
+        value: id
+    }))
     inquirer.prompt([{
     type: 'input',
-    name: 'rolename',
+    name: 'title',
     message: 'What would you like to name the role?'
     },
     {
@@ -80,36 +78,56 @@ const addRole = async ()=> {
     {
         type: 'input',
         name: 'dept',
-        message: 'What department is this role a part of?'
+        message: 'What department is this role a part of?',
+        choices: deptChoices
     }])
     await myemployees.addRoles(data)
     init()
 }
 
-const addEmp = ()=> {
-const [role] = 
+const addEmp = async ()=> {
+const [role] = myemployees.roles()
+const roleChoices = role.map(({id, title})=> ({
+    name: title,
+    value: id
+}))
+const [manager] =myemployees.employees()
+const managerChoices = manager.map(({id, first_name, last_name})=> ({
+    name: first_name + '' + last_name,
+    value: id
+    }))
 inquirer.prompt([{
     type: 'input',
-    name:'firstname',
+    name:'first_name',
     message: "What is the new employee's first name?"
 }, {
     type: 'input',
-    name:'lastname',
+    name:'last_name',
     message: "What is the new employee's last name?"
 }, {
     type: 'list',
     name:'role',
     message: "What is the new employee's role",
-    choices: []
+    choices:roleChoices
 }, {
     type: 'list',
     name:'manager',
-    message: "What is the new employee's first name?",
-    choices:[]
+    message: "Who is the new employee's manager?",
+    choices: managerChoices
 }])
+await myemployees.addEmp(data)
+init()
 }
 
-// const updateEmp = ()=> {
+const updateEmp = ()=> {
+ const [employee] = myemployees.employees()
+ const [role] = myemployees.roles()
+ inquirer.prompt([{
+     type: 'list',
+     name: 'employee',
+     choices: employee
+ }])
+ }
 
-// }
 init()
+
