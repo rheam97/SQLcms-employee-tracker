@@ -71,7 +71,7 @@ class MyEmployees{
     addRoles(data){
     const sql = `INSERT INTO role (title, salary, department_id) VALUES(?,?,?)`
     const params = [data.title, data.salary, data.dept]
-    return db.promise().query(sql, params).then(([result])=> {
+    return db.promise().query(sql, params).then(()=> {
         console.log("\n")
         console.log(`Added role named ${params[0]} into database.`)
         console.log("\n")
@@ -96,7 +96,7 @@ class MyEmployees{
         const params = [data.employee, data.role]
         return db.promise().query(sql, params).then(()=> {
             console.log("\n")
-            console.log(`Updated ${params[0]}'s role to ${params[1]} in database.`)
+            console.log(`Updated employee's role in database.`)
             console.log("\n")
         }).catch(error=> {
             throw error
