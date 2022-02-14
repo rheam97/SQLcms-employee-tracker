@@ -6,8 +6,7 @@ class MyEmployees{
       this.db = db
     }
     noTableDepartments(){
-        const sql = `SELECT department.name, department.department_id 
-        FROM department`
+        const sql = `SELECT * FROM department`
         return db.promise().execute(sql)
     }
     noTableRoles(){
@@ -96,7 +95,7 @@ class MyEmployees{
         const params = [data.employee, data.role]
         return db.promise().query(sql, params).then(()=> {
             console.log("\n")
-            console.log(`Updated employee's role in database.`)
+            console.log(`Updated employee's role in database. View employees to confirm.`)
             console.log("\n")
         }).catch(error=> {
             throw error
