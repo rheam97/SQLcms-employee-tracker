@@ -1,10 +1,49 @@
 const inquirer = require('inquirer')
 const myemployees = require('./class')
+const cTable = require('console.table')
 
+// list to either view departments, roles, employees, or add them/ exit/ delete/ update
+        // launch inquirer prompts
 const init = () => {
     inquirer.prompt({
-        // list to either view departments, roles, employees, or add them/ exit/ delete/ update
-        // launch inquirer prompts
+        type: 'list',
+        name: 'action',
+        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Exit']
+    }).then(({action})=> {
+        switch (action){
+            case 'View All Departments':
+            myemployees.departments().then({
+                init()
+            })
+            break;
+            case 'View All Roles':
+            myemployees.roles().then({
+                init()
+            })
+            init()
+            break;
+            case 'View All Employees':
+            myemployees.employees().then({
+                init()
+            })
+            init()
+            break;
+            case 'Add a Department':
+            addDept()
+            break;
+            case 'Add a Role':
+            addRole()
+            break;
+            case 'Add an Employee':
+            addEmp()
+            break;
+            case 'Update an Employee Role':
+            updateEmp()
+            break;
+            case 'Exit':
+            console.log('Goodbye.')
+            return;
+        }
     })
 }
 
@@ -44,7 +83,11 @@ inquirer.prompt({
 }, {
     //dept.
 }).then ({}=> {
-    
+
 })
+}
+
+const updateEmp = ()=> {
+
 }
 
