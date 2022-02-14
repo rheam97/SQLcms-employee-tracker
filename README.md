@@ -1,5 +1,4 @@
 # SQLcms-employee-tracker
-# SQLcms-employee-tracker
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -12,15 +11,17 @@
   
   <a name="description"></a>
   ## Description
-  A CLI application that allows users to view an employee database and update data. Also includes ability to delete data and get budget for departments.
+  A CLI application built with MySQL and Node that allows users to view an employee database and update data fields. Also includes ability to delete data and get budget for departments. 
+
+  Relies on OOP to modularize database queries and utilizes different forms of asynchronicity for the sake of practice and smooth UE.
 
   <a name="install"></a>
   ## Installation
-  clone the application and 'npm i' inquirer, console.table, and mysql2 packages. initialize the app using command 'node index.js'.
+  Clone the application, cd into folder, and 'npm i' inquirer, console.table, and mysql2 packages. Initialize the app using command 'node index.js'.
 
   <a name="usage"></a>
   ## Usage
-  Initialize the app and view list options by selecting and pressing enter. Exit the app by pressing exit. Make sure to avoid inputting null data.
+  Initialize the app and view list options using arrow keys and pressing enter. Exit the app by selecting and pressing exit. Make sure to avoid inputting null data.
 
 ```
 GIVEN a command-line application that accepts user input
@@ -55,4 +56,6 @@ Here is how the output looks in the terminal.
   You can find more of my work at [rheam97](https://github.com/rheam97)
   on GitHub and contact me with any questions
   at rheam97@gmail.com.
+
+  Repo URL: You can share the repo URL using this [link](https://github.com/rheam97/SQLcms-employee-tracker.git)
 
