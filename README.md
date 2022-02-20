@@ -57,5 +57,5 @@ Here is how the output looks in the terminal.
   on GitHub and contact me with any questions
   at rheam97@gmail.com.
 
-  Repo URL: You can share the repo URL using this [link](https://github.com/rheam97/SQLcms-employee-tracker.git)
+  Repo URL: You can share the repo URL using this [link](https://github.com/rheam97/SQLcms-employee-tracker.git).
 
