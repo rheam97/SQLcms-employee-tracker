@@ -44,9 +44,9 @@ THEN I am prompted to enter the employee’s first name, last name, role, and ma
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 ```
-Here is a [video]() depicting how the app functions.
+Here is a [video](https://drive.google.com/file/d/1-a4YejQ8Lnj5X33Calf_Bu2p_jO79b6O/view) depicting how the app functions.
 Here is how the output looks in the terminal.
-![output]()
+![output](sqlcms.png)
 
 
   <a name="license"></a>
