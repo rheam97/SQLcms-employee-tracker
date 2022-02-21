@@ -133,7 +133,7 @@ class MyEmployees{
             throw error
         })
     }
-    delEmp(){
+    delEmp(data){
         const sql = `DELETE FROM employee WHERE employee_id=?`
         const params = [data.delete]
         return db.promise().query(sql, params).then(()=> {
@@ -144,7 +144,7 @@ class MyEmployees{
             throw error
         })
     }
-    delRole(){
+    delRole(data){
         const sql = `DELETE FROM role WHERE role.role_id=?`
         const params = [data.delete]
         return db.promise().query(sql, params).then(()=> {
@@ -155,7 +155,7 @@ class MyEmployees{
             throw error
         })
     }
-    delDept(){
+    delDept(data){
         const sql = `DELETE FROM department WHERE department.department_id=?`
         const params = [data.delete]
         return db.promise().query(sql, params).then(()=> {

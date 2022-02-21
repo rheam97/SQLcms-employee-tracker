@@ -254,15 +254,16 @@ const updateManager = async()=> {
     }))
     inquirer.prompt([{
         type: 'list',
-        name: 'manager_id',
-        message: 'Which manager id will you give them?',
-        choices:[null, 1, 2, 3, 4]
-      },{
-        type: 'list',
         name: 'newManager',
         message:"Whose manager status would you like to update?",
         choices: employeeChoices
-    }
+    },
+    {
+        type: 'list',
+        name: 'manager_id',
+        message: 'Which manager id will you give them?',
+        choices:[null, 1, 2, 3, 4]
+      }
 ]).then(data=> {
     myemployees.newManager(data)
     int()
