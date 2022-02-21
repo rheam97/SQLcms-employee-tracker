@@ -178,6 +178,9 @@ class MyEmployees{
         })
     }
     newManager(data){
+        if(data.manager_id ===0){
+            data.manager_id=null
+        }
         const sql = `UPDATE employee SET manager_id=? WHERE employee_id =?`
         const params = [data.manager_id, data.newManager]
         return db.promise().query(sql, params).then(()=> {

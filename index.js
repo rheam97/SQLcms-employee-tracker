@@ -262,7 +262,7 @@ const updateManager = async()=> {
         type: 'list',
         name: 'manager_id',
         message: 'Which manager id will you give them?',
-        choices:[null, 1, 2, 3, 4]
+        choices:[0, 1, 2, 3, 4]
       }
 ]).then(data=> {
     myemployees.newManager(data)
