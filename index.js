@@ -10,7 +10,9 @@ function init () {
     inquirer.prompt({
         type: 'list',
         name: 'action',
-        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Exit']
+        choices: ['View All Departments', 'View All Roles', 'View All Employees','View Managers', 'View Employees by Department', 'View Budgets', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role', 
+        'Update Manager', 'Delete an Employee', 'Delete a Department', 
+        'Delete a Role',  'Exit']
     }).then(({action})=> {
         switch (action){
             case 'View All Departments':
@@ -25,6 +27,17 @@ function init () {
             myemployees.employees()
             int()
             break;
+            case 'View Managers':
+            myemployees.managers()
+            int()
+            break;
+            case 'View Employees by Department':
+            viewByDept()
+            break;
+            case 'View Budgets':
+            myemployees.budgets()
+            int()
+            break;
             case 'Add a Department':
             addDept()
             break;
@@ -36,6 +49,18 @@ function init () {
             break;
             case 'Update an Employee Role':
             updateEmp()
+            break;
+            case 'Update Manager':
+            updateManager()
+            break;
+            case 'Delete an Employee':
+            deleteEmp()
+            break;
+            case 'Delete a Department':
+            deleteDept()
+            break;
+            case 'Delete a Role':
+            deleteRole()
             break;
             case 'Exit':
             console.log('Goodbye.')
@@ -128,6 +153,56 @@ inquirer.prompt([{
 )
 }
 
+const deleteEmp = async()=> {
+    const [employee] = await myemployees.noTableEmployees()
+    const employeeChoices = employee.map(({employee_id, first_name, last_name})=> ({
+        name: first_name + ' ' + last_name,
+        value: employee_id
+    }))
+    inquirer.prompt([{
+        type: 'list',
+        name: 'delete',
+        message: 'Which employee would you like to delete?',
+        choices: employeeChoices
+    }]).then(data=> {
+        myemployees.delEmp(data)
+        int()
+    })
+}
+
+const deleteRole = async()=> {
+    const [role] = await myemployees.noTableRoles()
+ const roleChoices = role.map(({role_id, title})=> ({
+    name: title,
+    value: role_id
+ }))
+ inquirer.prompt([{
+    type: 'list',
+    name: 'delete',
+    message: 'Which role would you like to delete?',
+    choices: roleChoices
+}]).then(data=> {
+    myemployees.delRole(data)
+    int()
+})
+}
+
+const deleteDept = async()=> {
+    const [dept] = await myemployees.noTableDepartments()
+    const deptChoices = dept.map(({department_id, name})=> ({
+        name: name,
+        value: department_id
+    }))
+    inquirer.prompt([{
+        type: 'list',
+        name: 'delete',
+        message: 'Which department would you like to delete?',
+        choices: deptChoices
+    }]).then(data=> {
+        myemployees.delDept(data)
+        int()
+    })
+}
 const updateEmp = async ()=> {
  const [employee] = await myemployees.noTableEmployees()
  const employeeChoices = employee.map(({employee_id, first_name, last_name})=> ({
@@ -152,6 +227,47 @@ const updateEmp = async ()=> {
     myemployees.updateEmployees(data)
     int()
 })}
+
+const viewByDept = async()=> {
+    const [dept] = await myemployees.noTableDepartments()
+    const deptChoices = dept.map(({department_id, name})=> ({
+        name: name,
+        value: department_id
+    }))
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'dept',
+            message: "Which department's employees would you like to view?",
+            choices: deptChoices
+        }
+    ]).then(data=> {
+        myemployees.viewDept(data)
+        int()
+    })
+}
+const updateManager = async()=> {
+    const [employee] = await myemployees.noTableEmployees()
+    const employeeChoices = employee.map(({employee_id, first_name, last_name})=> ({
+        name: first_name + ' ' + last_name,
+        value: employee_id
+    }))
+    inquirer.prompt([{
+        type: 'list',
+        name: 'manager_id',
+        message: 'Which manager id will you give them?',
+        choices:[null, 1, 2, 3, 4]
+      },{
+        type: 'list',
+        name: 'newManager',
+        message:"Whose manager status would you like to update?",
+        choices: employeeChoices
+    }
+]).then(data=> {
+    myemployees.newManager(data)
+    int()
+})
+}
 
 init()
 
