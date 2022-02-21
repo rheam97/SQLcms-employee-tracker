@@ -168,7 +168,7 @@ class MyEmployees{
     }
     updateEmployees(data){
         const sql = `UPDATE employee SET role_id=? WHERE employee_id =?`
-        const params = [data.employee, data.role]
+        const params = [data.role, data.employee]
         return db.promise().query(sql, params).then(()=> {
             console.log("\n")
             console.log(`Updated employee's role in database. View employees to confirm.`)
