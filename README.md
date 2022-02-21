@@ -15,6 +15,8 @@
 
   Relies on OOP to modularize database queries and utilizes different forms of asynchronicity for the sake of practice and smooth UE.
 
+  Room for improvement: can refactor code to make class for index functions, can further refactor by removing recursion of init function. 
+
   <a name="install"></a>
   ## Installation
   Clone the application, cd into folder, and 'npm i' inquirer, console.table, and mysql2 packages. Initialize the app using command 'node index.js'.
