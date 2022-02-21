@@ -15,7 +15,7 @@
 
   Relies on OOP to modularize database queries and utilizes different forms of asynchronicity for the sake of practice and smooth UE.
 
-  Room for improvement: can refactor code to make class for index functions, can further refactor by removing recursion of init function. 
+  Room for improvement: can refactor code to make class for index functions, can further refactor by removing recursion of interval function, can also combine some functions
 
   <a name="install"></a>
   ## Installation
